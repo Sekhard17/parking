@@ -221,7 +221,7 @@ export default function RegistroComponent() {
             </form>
           </CardContent>
           <CardFooter className="flex justify-center">
-            <a href="#" className="text-sm text-blue-600 hover:underline">¿Ya tienes una cuenta? Inicia sesión</a>
+            <a href="/login" className="text-sm text-blue-600 hover:underline">¿Ya tienes una cuenta? Inicia sesión</a>
           </CardFooter>
         </Card>
       </motion.div>

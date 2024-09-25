@@ -144,6 +144,9 @@ export default function LoginComponent() {
           <CardFooter className="flex justify-center">
             <a href="#" className="text-sm text-blue-600 hover:underline">¿Olvidaste tu contraseña?</a>
           </CardFooter>
+          <CardFooter className="flex justify-center">
+            <a href="/registro" className="text-sm text-blue-600 hover:underline">Registrate</a>
+          </CardFooter>
         </Card>
       </motion.div>
     </div>

@@ -17,7 +17,7 @@ def validacion():
     
     try:
         if response : supabase.table("usuarios").select("rut").eq("rut", request.form.get('rut')).execute()
-        return jsonify({"error: El rut ya esta resgistrado"}), 40
+        return jsonify({"error: El rut ya esta resgistrado"}), 400
     
         
         

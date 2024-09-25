@@ -5,7 +5,6 @@ import { Car, LogOut, Search, BarChart3, Home, User, Settings } from "lucide-rea
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
-import { DatePickerWithRange } from "@/components/ui/date-picker-with-range"
 import { addDays } from 'date-fns'
 
 export default function DashboardOperador() {
@@ -134,7 +133,7 @@ export default function DashboardOperador() {
             <DialogTitle>Generar Reporte de Ganancias</DialogTitle>
           </DialogHeader>
           <div className="grid gap-4 py-4">
-            <DatePickerWithRange date={dateRange} setDate={setDateRange} />
+            
             <div className="bg-gray-100 p-4 rounded-md">
               <h3 className="font-semibold mb-2">Ganancias Totales:</h3>
               <p className="text-2xl font-bold text-green-600">$1,234,567</p>

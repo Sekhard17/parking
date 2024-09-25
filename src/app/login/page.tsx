@@ -13,6 +13,7 @@ export default function LoginComponent() {
   const [rut, setRut] = useState('')
   const [formattedRut, setFormattedRut] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState<string | null>(null)
 
   const formatRut = (value: string) => {
     const cleanedValue = value.replace(/[^0-9kK]/g, '').toUpperCase()
@@ -38,9 +39,32 @@ export default function LoginComponent() {
     setFormattedRut(formatRut(value))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     console.log('Login attempt with RUT:', rut)
+    
+    try {
+      const response = await fetch('http://localhost:5000/validacion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ rut: rut }),
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok) {
+        setError(null);
+        console.log(data.message);
+        // Aquí puedes continuar con el login
+      } else {
+        setError(data.error);
+      }
+    } catch (error) {
+      console.error('Error al validar el RUT:', error);
+      setError('Se produjo un error al validar el RUT. Inténtalo de nuevo.');
+    }
   }
 
   useEffect(() => {
@@ -108,10 +132,11 @@ export default function LoginComponent() {
                     placeholder="Ingrese su RUT"
                     value={formattedRut}
                     onChange={handleRutChange}
-                    className="pl-10 w-full"
+                    className={`pl-10 w-full ${error ? 'border-red-500' : 'border-gray-300'}`}
                     required
                   />
                 </div>
+                {error && <p className="text-red-500 text-sm">{error}</p>}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password" className="text-sm font-medium text-gray-700">Contraseña</Label>

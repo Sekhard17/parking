@@ -15,6 +15,12 @@ export default function LoginComponent() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
 
+  // Definición del tipo para la respuesta de la API
+interface ValidationResponse {
+  error?: string; // Campo opcional para errores
+  message?: string; // Mensaje de éxito
+}
+
   const formatRut = (value: string) => {
     const cleanedValue = value.replace(/[^0-9kK]/g, '').toUpperCase()
     let result = ''
@@ -40,8 +46,8 @@ export default function LoginComponent() {
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('Login attempt with RUT:', rut)
+    e.preventDefault();
+    console.log('Login attempt with RUT:', rut);
     
     try {
       const response = await fetch('http://localhost:5000/validacion', {
@@ -52,20 +58,20 @@ export default function LoginComponent() {
         body: JSON.stringify({ rut: rut }),
       });
       
-      const data = await response.json();
-      
+      const data: ValidationResponse = await response.json(); // Asigna el tipo
+  
       if (response.ok) {
         setError(null);
         console.log(data.message);
         // Aquí puedes continuar con el login
       } else {
-        setError(data.error);
+        setError(data.error ?? null); // Muestra el error en el frontend
       }
     } catch (error) {
       console.error('Error al validar el RUT:', error);
       setError('Se produjo un error al validar el RUT. Inténtalo de nuevo.');
     }
-  }
+  };
 
   useEffect(() => {
     setFormattedRut(formatRut(rut))

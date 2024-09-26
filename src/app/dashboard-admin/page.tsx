@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts'
+import Image from 'next/image'
 
 const revenueData = [
   { name: 'Lun', value: 400 },
@@ -83,27 +84,43 @@ export default function Dashboard({ initialDarkMode = false, adminName = "Admin"
         animate={{ width: isSidebarOpen ? 256 : 80 }}
       >
         <div className="p-4 flex items-center justify-between">
-          <AnimatePresence>
-            {isSidebarOpen && (
-              <motion.div 
-                className="flex items-center justify-between w-full"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <img src="/logo.svg" alt="Sur Innova Logo" className="h-8 w-auto flex-grow" />
-                <Button variant="ghost" size="icon" onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700">
-                  <Menu className="h-6 w-6" />
-                </Button>
-              </motion.div>
-            )}
-          </AnimatePresence>
-          {!isSidebarOpen && (
-            <Button variant="ghost" size="icon" onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700">
-              <Menu className="h-6 w-6" />
-            </Button>
-          )}
-        </div>
+  <AnimatePresence>
+    {isSidebarOpen && (
+      <motion.div 
+        className="flex items-center justify-between w-full"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <Image 
+          src="/images/sur.png" 
+          alt="Sur Innova Logo" 
+          className="h-12 w-auto"
+          width={500} 
+          height={500} 
+        />
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)} 
+          className="text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700"
+        >
+          <Menu className="h-6 w-6" />
+        </Button>
+      </motion.div>
+    )}
+  </AnimatePresence>
+  {!isSidebarOpen && (
+    <Button 
+      variant="ghost" 
+      size="icon" 
+      onClick={() => setIsSidebarOpen(!isSidebarOpen)} 
+      className="text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700"
+    >
+      <Menu className="h-6 w-6" />
+    </Button>
+  )}
+</div>
         <nav className="mt-8">
           {sidebarItems.map((category, categoryIndex) => (
             <div key={categoryIndex} className="mb-4">
@@ -154,7 +171,13 @@ export default function Dashboard({ initialDarkMode = false, adminName = "Admin"
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div className="flex items-center">
               {!isSidebarOpen && (
-                <img src="/logo.svg" alt="Sur Innova Logo" className="h-8 w-auto mr-4" />
+                <Image 
+                src="/images/sur.png" 
+                alt="Sur Innova Logo" 
+                className="h-12 w-auto mr-4" 
+                width={150} 
+                height={150} 
+              />
               )}
               <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
                 ¡Hola, {adminName}!
